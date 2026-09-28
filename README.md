@@ -1,86 +1,88 @@
-# UI Constructor — визуальный конструктор веб-интерфейсов
+# UI Constructor — visual web-interface builder
 
-Один самодостаточный HTML-файл (`index.html`). Открыл в браузере — и работаешь. Без сборки, без зависимостей, без интернета.
+A single self-contained HTML file (`index.html`). Open it in a browser and start working. No build step, no dependencies, no internet required.
 
-## Зачем это нужно
+[Русская версия: README.ru.md](README.ru.md)
 
-**Основная цель** — быстро набросать, как должен выглядеть веб-интерфейс, и передать макет ИИ, не объясняя словами «где какая кнопка должна находиться».
+## Why
 
-Рабочий цикл:
+**The main goal** — quickly sketch what a web interface should look like and hand the mockup to an AI without explaining in words "which button goes where".
 
-1. Нарисуй интерфейс: перетащи элементы на поле, расставь их, подпиши, при необходимости нарисуй пометки карандашом.
-2. Сохрани проект в **JSON** (точная структура: размеры, позиции, тексты, цвета).
-3. Экспортируй поле в **PNG** (с прозрачным фоном) или **JPG** (с белым) — визуальный макет.
-4. Отправь оба файла ИИ вместе с промптом:
+The workflow:
 
-> «Сделай веб-страницу по макету. В PNG показан внешний вид, в JSON — точные координаты, размеры, тексты и цвета элементов. Сгенерируй HTML/CSS по этой спецификации.»
+1. Draw the interface: drag elements onto the canvas, arrange them, label them, add hand-drawn notes with the pencil if needed.
+2. Save the project as **JSON** (exact structure: sizes, positions, texts, colors).
+3. Export the canvas as **PNG** (transparent background) or **JPG** (white) — the visual mockup.
+4. Send both files to an AI with a prompt like:
 
-ИИ получит и картинку (как выглядит), и JSON (какие элементы, где, каких размеров) — ничего объяснять не нужно.
+> "Build a web page from this mockup. The PNG shows the appearance, the JSON contains exact coordinates, sizes, texts, and colors of all elements. Generate HTML/CSS from this specification."
 
-## Как запустить
+The AI gets both the picture (what it looks like) and the JSON (what elements, where, how big) — no verbal explanation needed.
 
-Открой `index.html` в любом современном браузере (Chrome, Firefox, Edge, Safari). Всё.
+## Getting started
 
-## Что умеет
+Open `index.html` in any modern browser (Chrome, Firefox, Edge, Safari). That's it.
 
-- **11 готовых элементов** в панели «Элементы» слева: кнопка, поле ввода, поле вывода, textarea, radio, checkbox, switch, select, slider, картинка, панель.
-- **Свои элементы из PNG**: кнопка «➕ Добавить PNG» — загружаешь картинку (до 4 МБ), она появляется в секции «Свои PNG» и дальше работает как обычный элемент.
-- **Редактирование**: перетаскивание по полю, изменение размера ручками, переименование, текст, цвета, скругление — в панели свойств справа. Удаление — Del/Backspace, отмена выделения — Esc.
-- **Карандаш ✏️** — рисование на поле с выбором цвета (пометки, стрелки, подписи). **Ластик 🧽** — стирает штрихи карандаша.
-- **Подложка**: любой цвет фона поля или «⌀» — без подложки (тогда PNG экспортируется прозрачным).
-- **Сохранение**: JSON-файл (скачивание) + автосохранение в localStorage браузера — проект не пропадёт после перезагрузки страницы.
-- **Экспорт поля**: PNG (фон прозрачный или цветной, как в настройках) и JPG (белый или цветной фон). Экспортируется только рабочее поле, без панелей конструктора.
+## Features
 
-## Как пользоваться
+- **11 built-in elements** in the "Elements" panel on the left: button, text input, label, textarea, radio, checkbox, switch, select, slider, image, panel.
+- **Custom PNG elements**: the "➕ Add PNG" button — upload an image (up to 4 MB) and it appears in the "Custom PNG" section, then works like any other element.
+- **Editing**: drag to move, resize with handles, rename, text, colors, border radius — in the properties panel on the right. Delete with Del/Backspace, deselect with Esc.
+- **Pencil ✏️** — draw on the canvas with a color picker (notes, arrows, annotations). **Eraser 🧽** — erases pencil strokes.
+- **Background**: any canvas color, or "⌀" — no background (PNG exports transparent).
+- **Saving**: JSON file (download) + autosave to browser localStorage — the project survives page reloads.
+- **Canvas export**: PNG (transparent or colored, per settings) and JPG (white or colored). Only the canvas is exported, without the editor panels.
 
-1. Слева — панель «Элементы». Перетащи элемент на поле или кликни — он появится на поле.
-2. Клик по элементу на поле выделяет его: справа открываются свойства (имя, текст, размер, цвета).
-3. Тяни за уголки — меняется размер. Тяни за тело — перемещается.
-4. Цвет фона поля и инструменты карандаш/ластик — в верхней панели.
-5. «Сохранить JSON» и «PNG» / «JPG» — в верхней панели. Файлы скачиваются в папку загрузок.
+## How to use
 
-## Формат JSON
+1. On the left — the "Elements" panel. Drag an element onto the canvas or click it to add.
+2. Click an element on the canvas to select it: properties (name, text, size, colors) open on the right.
+3. Drag the corner handles to resize, drag the body to move.
+4. Canvas background color and the pencil/eraser tools are in the top toolbar.
+5. "Save JSON" and "PNG" / "JPG" are in the top toolbar. Files download to your downloads folder.
+
+## JSON format
 
 ```json
 {
   "app": "ui-constructor",
   "version": 1,
   "savedAt": "2026-09-28T12:00:00.000Z",
-  "name": "Мой проект",
+  "name": "My project",
   "canvas": {"w": 800, "h": 600, "bg": "#f5f5f2"},
   "elements": [
     {
       "id": 1,
       "type": "button",
-      "name": "Кнопка",
+      "name": "Button",
       "x": 40, "y": 40, "w": 120, "h": 40,
-      "text": "Кнопка",
+      "text": "Button",
       "bg": "#2f6fed", "color": "#ffffff", "radius": 8
     },
     {
       "id": 2,
       "type": "custom-img",
-      "name": "Логотип",
+      "name": "Logo",
       "x": 200, "y": 40, "w": 160, "h": 120,
       "src": "data:image/png;base64,…"
     }
   ],
-  "customImages": [{"id": 1, "name": "Логотип", "src": "data:image/png;base64,…"}],
+  "customImages": [{"id": 1, "name": "Logo", "src": "data:image/png;base64,…"}],
   "strokes": [{"color": "#e5484d", "width": 4, "points": [[10, 10], [50, 30]]}]
 }
 ```
 
-- `canvas.bg` — `null`, если подложка выключена (прозрачный PNG).
-- `type` — один из: `button`, `input`, `label`, `textarea`, `radio`, `checkbox`, `switch`, `select`, `slider`, `image`, `panel`, `custom-img`.
-- `strokes` — штрихи карандаша (пометки на макете); в коде ИИ их реализовывать не нужно, это аннотации.
-- `customImages` — загруженные пользователем PNG (data URL), чтобы `src` в элементах не дублировался.
+- `canvas.bg` — `null` when the background is off (transparent PNG).
+- `type` — one of: `button`, `input`, `label`, `textarea`, `radio`, `checkbox`, `switch`, `select`, `slider`, `image`, `panel`, `custom-img`.
+- `strokes` — pencil strokes (annotations on the mockup); the AI should not implement them in code, they are notes.
+- `customImages` — user-uploaded PNGs (data URLs), so `src` in elements isn't duplicated.
 
-## Ограничения
+## Limitations
 
-- Всё хранится в одном файле и localStorage браузера. JSON с большими PNG (data URL) может упереться в лимит localStorage (~5–10 МБ) — при превышении браузер покажет ошибку сохранения.
-- Один пользовательский PNG — до 4 МБ.
-- Это конструктор макетов, а не генератор кода: он описывает интерфейс, код по макету пишет ИИ (или человек).
+- Everything lives in a single file and browser localStorage. JSON with large PNG data URLs may hit the localStorage limit (~5–10 MB) — the browser will show a save error if exceeded.
+- One custom PNG — up to 4 MB.
+- This is a mockup builder, not a code generator: it describes the interface; the AI (or a human) writes the code from the mockup.
 
-## Проверка
+## Testing
 
-Файл покрыт e2e-тестами (headless Chrome через CDP): элементы, свойства, карандаш/ластик, свои PNG, автосохранение, экспорт PNG/JPG с проверкой пикселей. Результат последних проходов: 27/27.
+The file is covered by e2e tests (headless Chrome via CDP): elements, properties, pencil/eraser, custom PNGs, autosave, PNG/JPG export with pixel verification. Latest runs: 27/27.
